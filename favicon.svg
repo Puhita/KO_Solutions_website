@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-31 -78 380 380" width="380" height="380">
+<defs>
+<mask id="cutHead" maskUnits="userSpaceOnUse" x="-100" y="-200" width="600" height="700">
+<rect x="-100" y="-200" width="600" height="700" fill="#fff"></rect>
+<g fill="#000">
+<polygon points="102.3,119.1 168.6,20.6 229.4,41.9 142.6,123.0"></polygon>
+<polygon points="227.2,11.4 209.3,48.0 243.6,57.8 208.1,75.2 224.6,98.5 191.0,92.1 189.9,113.8 171.4,94.2 160.4,108.1 156.9,87.9 140.2,94.1 146.5,78.0 124.6,73.5 139.6,62.6 119.1,41.4 143.0,41.6 138.1,5.6 162.2,25.2 182.2,-10.0 190.1,26.8"></polygon>
+</g>
+</mask>
+<mask id="thumbHead" maskUnits="userSpaceOnUse" x="-10" y="-60" width="140" height="120">
+<rect x="-10" y="-60" width="140" height="120" fill="#fff"></rect>
+<rect x="42" y="19" width="50" height="27" rx="13.5" fill="#000" stroke="#000" stroke-width="9"></rect>
+</mask>
+</defs>
+<circle cx="146.0" cy="170.0" r="128.0" fill="#141A33" mask="url(#cutHead)"></circle>
+<path d="M540 688H814L567 405L819 0H558L415 252L295 154V0H74V688H295V394Z" transform="translate(36.49 208.00) scale(0.13081 -0.13081)" fill="#FF3B4E"></path>
+<path d="M788 344Q788 170 691.0 79.0Q594 -12 416 -12Q238 -12 141.5 78.5Q45 169 45 344Q45 519 141.5 609.5Q238 700 416 700Q594 700 691.0 609.0Q788 518 788 344ZM271 376V312Q271 239 308.0 196.0Q345 153 416 153Q487 153 524.5 196.0Q562 239 562 312V376Q562 449 524.5 492.0Q487 535 416 535Q345 535 308.0 492.0Q271 449 271 376Z" transform="translate(142.74 208.00) scale(0.13081 -0.13081)" fill="#FF3B4E"></path>
+
+<polygon points="104.6,121.1 185.2,24.3 223.2,26.1 140.3,121.0" fill="#FF3B4E"></polygon>
+<g transform="translate(197.1 33.5) rotate(-49.5) scale(1.05)" fill="#FF3B4E">
+<rect x="0" y="-25" width="22" height="50" rx="5"></rect>
+<g mask="url(#thumbHead)"><path d="M29,-26 Q29,-35 40,-35 H88 A35,35 0 0 1 88,35 H40 Q29,35 29,26 Z"></path></g>
+<rect x="42" y="19" width="50" height="27" rx="13.5"></rect>
+</g>
+</svg>
