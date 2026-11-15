@@ -123,23 +123,38 @@ button{font-family:inherit}
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px">
-<sc-for list="{{projects}}" as="p" hint-placeholder-count="6">
+<sc-for list="{{projects}}" as="p" hint-placeholder-count="3">
 <article style="flex: 1 1 320px; max-width: 100%; min-width: 0; display: flex; flex-direction: column; background: {{surface}}; border: 1px solid {{border}}; border-radius: 18px; overflow: hidden">
-<div style="height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: {{thumbBg}}; border-bottom: 1px dashed {{border}}; color: {{muted}}">
-<sc-if value="{{p.isGame}}" hint-placeholder-val="{{ true }}">
-<svg aria-hidden="true" width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="16" width="52" height="32" rx="16"></rect><path d="M20 26v12M14 32h12"></path><circle cx="42" cy="29" r="2.5"></circle><circle cx="48" cy="36" r="2.5"></circle></svg>
+<div style="position: relative; aspect-ratio: 16 / 10; background: {{thumbBg}}; border-bottom: 1px solid {{border}}; overflow: hidden">
+<sc-if value="{{p.cur.isVideo}}" hint-placeholder-val="{{ true }}">
+<video key="{{p.cur.key}}" data-clip="{{p.cur.src}}" data-poster="{{p.cur.poster}}" data-autoplay="{{p.autoPlay}}" muted loop playsInline preload="metadata" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; display: block"></video>
 </sc-if>
-<sc-if value="{{p.isSoftware}}" hint-placeholder-val="{{ false }}">
-<svg aria-hidden="true" width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 20L10 32l14 12M40 20l14 12-14 12M36 16l-8 32"></path></svg>
+<sc-if value="{{p.cur.hasStill}}" hint-placeholder-val="{{ false }}">
+<div key="{{p.cur.key}}" role="img" aria-label="{{p.cur.alt}}" style="position: absolute; inset: 0; background-image: {{p.cur.bg}}; background-size: cover; background-position: center top"></div>
 </sc-if>
-<span style="font-size: 13px; font-weight: 500">[SCREENSHOT / COVER ART]</span>
+<button onClick="{{p.open}}" aria-label="{{p.openLabel}}" style="position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in"></button>
+<sc-if value="{{p.cur.isLink}}" hint-placeholder-val="{{ false }}">
+<span aria-hidden="true" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 999px; background: rgba(225, 29, 56, 0.92); display: flex; align-items: center; justify-content: center; pointer-events: none"><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"></path></svg></span>
+</sc-if>
+<span style="position: absolute; left: 10px; top: 10px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: rgba(11, 13, 23, 0.78); color: #F3F4FA; font-size: 12px; font-weight: 600; pointer-events: none"><span style="width: 7px; height: 7px; border-radius: 999px; background: {{p.cur.dot}}"></span>{{p.cur.kindLabel}}</span>
+<span style="position: absolute; right: 10px; top: 10px; padding: 4px 10px; border-radius: 999px; background: rgba(11, 13, 23, 0.78); color: #F3F4FA; font-size: 12px; font-weight: 600; pointer-events: none">{{p.counter}}</span>
+<button onClick="{{p.prev}}" aria-label="Previous image" style="position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 999px; border: 0; background: rgba(11, 13, 23, 0.72); color: #fff; font-size: 22px; line-height: 1; cursor: pointer">&#8249;</button>
+<button onClick="{{p.next}}" aria-label="Next image" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 999px; border: 0; background: rgba(11, 13, 23, 0.72); color: #fff; font-size: 22px; line-height: 1; cursor: pointer">&#8250;</button>
+<div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 12px 8px; background: linear-gradient(transparent, rgba(11, 13, 23, 0.82)); display: flex; align-items: center; justify-content: space-between; gap: 8px; pointer-events: none">
+<span style="color: #F3F4FA; font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{p.cur.label}}</span>
+<span style="display: flex; gap: 2px; pointer-events: auto">
+<sc-for list="{{p.dots}}" as="d" hint-placeholder-count="4">
+<button onClick="{{d.go}}" aria-label="{{d.label}}" aria-current="{{d.current}}" style="width: 22px; height: 22px; padding: 0; border: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center"><span style="width: {{d.w}}; height: 7px; border-radius: 999px; background: {{d.bg}}"></span></button>
+</sc-for>
+</span>
+</div>
 </div>
 <div style="padding: 24px; display: flex; flex-direction: column; gap: 12px; flex: 1">
 <span style="align-self: flex-start; padding: 4px 12px; border-radius: 999px; background: {{surface2}}; color: {{link}}; font-size: 13px; font-weight: 600">{{p.tag}}</span>
 <h3 style="margin: 0; font-family: 'Archivo Black', Inter, sans-serif; font-weight: 400; font-size: 22px; line-height: 1.15">{{p.name}}</h3>
 <p style="margin: 0; color: {{muted}}; font-size: 15px">{{p.desc}}</p>
 <p style="margin: 0; color: {{muted}}; font-size: 14px; font-weight: 500">{{p.meta}}</p>
-<a href="#projects" style="margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 10px; background: {{accent}}; color: {{onAccent}}; font-size: 15px; font-weight: 600">{{p.action}}</a>
+<a href="{{p.url}}" target="_blank" rel="noopener" style="margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 10px; background: {{accent}}; color: {{onAccent}}; font-size: 15px; font-weight: 600">{{p.action}}</a>
 </div>
 </article>
 </sc-for>
@@ -189,6 +204,46 @@ button{font-family:inherit}
 <span>Games · VS Code extensions · Software tools</span>
 </div>
 </footer>
+<sc-if value="{{lb.open}}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-modal="true" aria-label="{{lb.title}}" onClick="{{lb.onBackdrop}}" style="position: fixed; inset: 0; z-index: 50; background: rgba(5, 7, 15, 0.9); display: flex; align-items: center; justify-content: center; padding: 16px; box-sizing: border-box; outline: none">
+<div style="width: 100%; max-width: 1120px; max-height: 100%; display: flex; flex-direction: column; gap: 12px; color: #F3F4FA">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<div style="min-width: 0; display: flex; flex-direction: column">
+<span style="font-family: 'Archivo Black', Inter, sans-serif; font-size: 20px; line-height: 1.2">{{lb.title}}</span>
+<span style="font-size: 14px; color: #A9B0CC">{{lb.cur.kindLabel}} · {{lb.cur.label}} · {{lb.counter}}</span>
+</div>
+<div style="display: flex; gap: 8px; flex-shrink: 0">
+<a href="{{lb.siteUrl}}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid #2A3358; color: #F3F4FA; font-size: 14px; font-weight: 600">Open live site</a>
+<button onClick="{{lb.close}}" aria-label="Close viewer" style="width: 44px; height: 44px; border-radius: 10px; border: 1px solid #2A3358; background: #141A33; color: #F3F4FA; font-size: 22px; cursor: pointer">&#215;</button>
+</div>
+</div>
+<div style="position: relative; align-self: center; width: min(100%, calc(70vh * 1.6)); aspect-ratio: 16 / 10; background: #0B0D17; border-radius: 14px; overflow: hidden">
+<sc-if value="{{lb.cur.isVideo}}" hint-placeholder-val="{{ true }}">
+<video key="{{lb.cur.key}}" data-clip="{{lb.cur.src}}" data-poster="{{lb.cur.poster}}" data-autoplay="true" muted loop playsInline controls style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #0B0D17"></video>
+</sc-if>
+<sc-if value="{{lb.cur.isImage}}" hint-placeholder-val="{{ false }}">
+<div key="{{lb.cur.key}}" role="img" aria-label="{{lb.cur.alt}}" style="position: absolute; inset: 0; background-image: {{lb.cur.bg}}; background-size: contain; background-repeat: no-repeat; background-position: center"></div>
+</sc-if>
+<sc-if value="{{lb.cur.isLink}}" hint-placeholder-val="{{ false }}">
+<a href="{{lb.cur.href}}" target="_blank" rel="noopener" aria-label="Watch the trailer on YouTube" style="position: absolute; inset: 0; display: block; background-image: {{lb.cur.bg}}; background-size: contain; background-repeat: no-repeat; background-position: center">
+<span style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; background: #E11D38; color: #fff; font-weight: 600; font-size: 16px"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"></path></svg>Watch on YouTube</span>
+</a>
+</sc-if>
+<button onClick="{{lb.prev}}" aria-label="Previous" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 999px; border: 0; background: rgba(11, 13, 23, 0.75); color: #fff; font-size: 26px; cursor: pointer">&#8249;</button>
+<button onClick="{{lb.next}}" aria-label="Next" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 999px; border: 0; background: rgba(11, 13, 23, 0.75); color: #fff; font-size: 26px; cursor: pointer">&#8250;</button>
+</div>
+<div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px">
+<sc-for list="{{lb.thumbs}}" as="t" hint-placeholder-count="4">
+<button onClick="{{t.go}}" aria-label="{{t.label}}" aria-current="{{t.current}}" style="flex: 0 0 auto; position: relative; width: 112px; aspect-ratio: 16 / 10; padding: 0; border-radius: 8px; border: 2px solid {{t.border}}; overflow: hidden; background: #141A33; cursor: pointer; opacity: {{t.opacity}}">
+<span style="position: absolute; inset: 0; background-image: {{t.bg}}; background-size: cover; background-position: center top"></span>
+<sc-if value="{{t.moving}}" hint-placeholder-val="{{ true }}"><span style="position: absolute; left: 4px; bottom: 4px; padding: 1px 6px; border-radius: 999px; background: rgba(11, 13, 23, 0.8); color: #fff; font-size: 10px; font-weight: 600">&#9654;</span></sc-if>
+</button>
+</sc-for>
+</div>
+<span style="font-size: 13px; color: #A9B0CC">Arrow keys to switch · Esc to close · Recorded from the live site</span>
+</div>
+</div>
+</sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"mode":{"editor":"enum","options":["light","dark"],"default":"light"},"$preview":{"width":1440,"height":2700}}'>
@@ -201,14 +256,66 @@ const t = dark
 ? { bg: '#0B0D17', surface: '#141A33', surface2: '#10152B', thumbBg: '#1B2345', text: '#F3F4FA', muted: '#A9B0CC', border: '#2A3358', accent: '#FF3B4E', onAccent: '#141A33', link: '#FF6B79', disc: '#F3F4FA', red: '#D91E36', panel: '#F3F4FA', onPanel: '#141A33', panelBtn: '#141A33', onPanelBtn: '#F3F4FA' }
 : { bg: '#F6F7FB', surface: '#FFFFFF', surface2: '#ECEEF7', thumbBg: '#E3E7F4', text: '#141A33', muted: '#4A5273', border: '#D3D8EA', accent: '#E11D38', onAccent: '#FFFFFF', link: '#C4122F', disc: '#141A33', red: '#FF3B4E', panel: '#141A33', onPanel: '#F3F4FA', panelBtn: '#FF3B4E', onPanelBtn: '#141A33' };
 const all = [
-{ kind: 'game', tag: 'Game', name: '[GAME NAME]', desc: '[One-line description of the game.]', meta: '[Platform: Android / PC]', action: '[Play / Download APK]' },
-{ kind: 'game', tag: 'Game', name: '[GAME NAME]', desc: '[One-line description of the game.]', meta: '[Platform: Android / PC]', action: '[Play / Download]' },
-{ kind: 'game', tag: 'Game', name: '[GAME NAME]', desc: '[One-line description of the game.]', meta: '[Platform: Android / PC]', action: '[Play / Download]' },
-{ kind: 'software', tag: 'VS Code extension', name: '[EXTENSION NAME]', desc: '[One-line description of what the extension does.]', meta: '[Marketplace link / version]', action: '[Install]' },
-{ kind: 'software', tag: 'Software tool', name: '[TOOL NAME]', desc: '[One-line description of the tool.]', meta: '[Platform / license]', action: '[Open / Download]' },
-{ kind: 'software', tag: 'Software tool', name: '[TOOL NAME]', desc: '[One-line description of the tool.]', meta: '[Platform / license]', action: '[Open / Download]' }
+{ kind: 'game', tag: 'Game', name: 'The Fatty', desc: 'Free top-down zombie action game. Swing a physics belt, rescue villagers, grow your village and survive the nightly horde.', meta: 'Android 8.0+ · Windows PC · Free', action: 'Play / Download', url: 'https://thefatty.ko-solutions.net/', media: [
+  { t: 'link', name: 'fatty-trailer', label: 'Official trailer (1:15)', href: 'https://www.youtube.com/watch?v=_YEZSYdzF0g', alt: 'The Fatty trailer thumbnail: the hero swings his belt while zombies close in' },
+  { t: 'video', name: 'fatty-tour', label: 'Scroll through the site', alt: 'Scrolling through The Fatty website' },
+  { t: 'image', name: 'fatty-hero', label: 'Home page', alt: 'The Fatty home page with download buttons' },
+  { t: 'image', name: 'fatty-combat', label: 'How a run goes, belt combat', alt: 'How a run goes and belt combat section' },
+  { t: 'image', name: 'fatty-zombies', label: 'Zombie types and bosses', alt: 'Zombie types and bosses section' }
+] },
+{ kind: 'software', tag: 'VS Code extension', name: 'Hacky', desc: 'A shared brain for your team\'s Claude Code agents: one shared memory, task board and question queue. Ask once, answer once, every agent knows.', meta: 'VS Code extension · Windows app · MCP server · Open source (MIT)', action: 'Get Hacky', url: 'https://hacky.ko-solutions.net/', media: [
+  { t: 'video', name: 'hacky-hero', label: 'Live sidebar demo', alt: 'Hacky home page with the animated sidebar demo' },
+  { t: 'video', name: 'hacky-tour', label: 'Board: Messages, Tasks, Team, Activity', alt: 'Hacky Board switching between its four tabs' },
+  { t: 'video', name: 'hacky-map', label: 'Hacky Map: live team graph', alt: 'Hacky Map graph with links flowing between people and questions' },
+  { t: 'video', name: 'hacky-problem', label: 'Why Hacky', alt: 'Scrolling through the problem Hacky solves' },
+  { t: 'image', name: 'hacky-features', label: 'Features', alt: 'Hacky features grid' }
+] },
+{ kind: 'software', tag: 'Software tool', name: 'DataTransfer', desc: 'End-to-end encrypted project chat for teams. Share API keys and .env secrets that are encrypted on your device before they leave it.', meta: 'Web · Android', action: 'Open DataTransfer', url: 'https://datatransfer.ko-solutions.net/', media: [
+  { t: 'video', name: 'dt-flow', label: 'Log in, create account, reset password', alt: 'Moving between the DataTransfer log in, create account and reset password screens' },
+  { t: 'image', name: 'dt-login', label: 'Log in', alt: 'DataTransfer log in screen' },
+  { t: 'image', name: 'dt-signup', label: 'Create account', alt: 'DataTransfer create account screen' }
+] }
 ];
-const projects = all.filter((p) => filter === 'all' || p.kind === filter).map((p) => ({ ...p, isGame: p.kind === 'game', isSoftware: p.kind === 'software' }));
+const slides = st.slides || {};
+const reduced = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const slideOf = (p, i) => {
+  const m = p.media[i];
+  return { key: m.name, isVideo: m.t === 'video', isImage: m.t === 'image', isLink: m.t === 'link', hasStill: m.t !== 'video', src: './media/' + m.name + '.mp4', poster: './media/' + m.name + '.jpg', href: m.href, label: m.label, alt: m.alt,
+    bg: "url('./media/" + m.name + ".jpg')", kindLabel: m.t === 'video' ? 'Live clip' : m.t === 'link' ? 'Trailer' : 'Screenshot', dot: m.t === 'image' ? '#A9B0CC' : '#FF3B4E' };
+};
+const go = (name, n, i) => () => this.setState({ slides: { ...slides, [name]: ((i % n) + n) % n } });
+const projects = all.filter((p) => filter === 'all' || p.kind === filter).map((p) => {
+  const n = p.media.length, i = slides[p.name] || 0, cur = slideOf(p, i);
+  return { ...p, isGame: p.kind === 'game', isSoftware: p.kind === 'software', host: p.url.replace(/^https:\/\//, '').replace(/\/$/, ''),
+    cur, autoPlay: !reduced, counter: (i + 1) + ' / ' + n,
+    prev: go(p.name, n, i - 1), next: go(p.name, n, i + 1),
+    open: () => { this.setState({ lb: p.name }); setTimeout(() => { const c = document.querySelector('[aria-label="Close viewer"]'); if (c) c.focus(); }, 50); }, openLabel: 'Open ' + p.name + ' media viewer, ' + cur.label,
+    dots: p.media.map((m, j) => ({ go: go(p.name, n, j), label: 'Show ' + m.label, current: j === i ? 'true' : 'false', w: j === i ? '18px' : '7px', bg: j === i ? '#FFFFFF' : 'rgba(255,255,255,0.55)' })) };
+});
+if (typeof window !== 'undefined') {
+  // Videos carry data-clip instead of src so the hidden raw template never requests "{{...}}" URLs.
+  requestAnimationFrame(() => document.querySelectorAll('video[data-clip]').forEach((v) => {
+    if (v.getAttribute('src') === v.dataset.clip) return;
+    v.poster = v.dataset.poster; v.src = v.dataset.clip;
+    if (v.dataset.autoplay === 'true') v.play().catch(() => {});
+  }));
+}
+if (typeof window !== 'undefined' && !window.__koLbKeys) {
+  window.__koLbKeys = true;
+  window.addEventListener('keydown', (e) => { const h = window.__koLb; if (!h) return; if (e.key === 'Escape') h.close(); else if (e.key === 'ArrowLeft') h.prev(); else if (e.key === 'ArrowRight') h.next(); });
+}
+const lbP = st.lb ? all.find((p) => p.name === st.lb) : null;
+let lb = { open: false };
+if (typeof window !== 'undefined') window.__koLb = null;
+if (lbP) {
+  const n = lbP.media.length, i = slides[lbP.name] || 0;
+  const prev = go(lbP.name, n, i - 1), next = go(lbP.name, n, i + 1);
+  const close = () => { this.setState({ lb: null }); setTimeout(() => { const o = document.querySelector('[aria-label^="Open ' + lbP.name + ' "]'); if (o) o.focus(); }, 50); };
+  lb = { open: true, title: lbP.name, siteUrl: lbP.url, cur: slideOf(lbP, i), counter: (i + 1) + ' / ' + n, prev, next, close,
+    onBackdrop: (e) => { if (e.target === e.currentTarget) close(); },
+    thumbs: lbP.media.map((m, j) => ({ go: go(lbP.name, n, j), label: 'Show ' + m.label, current: j === i ? 'true' : 'false', bg: "url('./media/" + m.name + ".jpg')", moving: m.t !== 'image', border: j === i ? '#FF3B4E' : 'transparent', opacity: j === i ? '1' : '0.7' })) };
+  if (typeof window !== 'undefined') window.__koLb = { prev, next, close };
+}
 const filters = [{ id: 'all', label: 'All' }, { id: 'game', label: 'Games' }, { id: 'software', label: 'Software' }].map((f) => {
 const active = f.id === filter;
 return { label: f.label, active: active ? 'true' : 'false', pick: () => this.setState({ filter: f.id }), bg: active ? t.accent : t.surface, color: active ? t.onAccent : t.text, border: active ? t.accent : t.border };
@@ -220,7 +327,7 @@ panel: t.panel, onPanel: t.onPanel, panelBtn: t.panelBtn, onPanelBtn: t.onPanelB
 themeButton: dark ? 'Dark mode' : 'Light mode',
 themeLabel: dark ? 'Switch to light mode' : 'Switch to dark mode',
 toggleTheme: () => this.setState({ dark: !dark }),
-filters, projects
+filters, projects, lb
 };
 }
 }
