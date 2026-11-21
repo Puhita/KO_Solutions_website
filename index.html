@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ko-solutions - website</title>
+<link rel="stylesheet" href="./vendor/bootstrap.min.css">
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
@@ -17,6 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <style>
+html{scroll-padding-top:72px}
 body{margin:0}
 a{text-decoration:none}
 button{font-family:inherit}
@@ -24,8 +26,10 @@ button{font-family:inherit}
 </helmet>
 <div style="min-height: 100%; background: {{bg}}; color: {{text}}; font-family: Inter, system-ui, sans-serif; line-height: 1.5">
 
-<header style="max-width: 1160px; margin: 0 auto; padding: 16px clamp(16px, 4vw, 32px); box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px">
-<a href="#top" style="display: flex; align-items: center; gap: 12px; color: {{text}}" aria-label="ko-solutions home">
+<header>
+<nav class="navbar navbar-expand-md sticky-top" style="background: {{bg}}; border-bottom: 1px solid {{border}}; padding: 0; z-index: 40">
+<div class="container-fluid" style="max-width: 1160px; margin: 0 auto; padding: 10px clamp(16px, 4vw, 32px)">
+<a class="navbar-brand d-flex align-items-center gap-2 m-0 p-0" href="#top" aria-label="ko-solutions home" style="color: {{text}}">
 <svg width="56" height="56" style="display:block" role="img" aria-label="ko-solutions logo: bold KO and the word SOLUTIONS in a disc; the upper arm of the K continues as an arm that punches a jagged hole through the top right of the disc with a boxing glove" viewBox="-31 -78 380 380" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <mask id="cutHead" maskUnits="userSpaceOnUse" x="-100" y="-200" width="600" height="700">
@@ -53,10 +57,17 @@ button{font-family:inherit}
 </svg>
 <span style="font-family: 'Archivo Black', Inter, sans-serif; font-size: 22px; letter-spacing: 0.5px">ko-solutions</span>
 </a>
-<nav style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px">
-<a href="#projects" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; color: {{text}}; font-weight: 500">Projects</a>
-<a href="#about" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; color: {{text}}; font-weight: 500">About us</a>
-<button onClick="{{toggleTheme}}" aria-label="{{themeLabel}}" style="min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid {{border}}; background: {{surface}}; color: {{text}}; font-size: 14px; font-weight: 600; cursor: pointer">{{themeButton}}</button>
+<button class="navbar-toggler" type="button" onClick="{{toggleNav}}" aria-controls="mainNav" aria-expanded="{{navExpanded}}" aria-label="Toggle navigation" style="border-color: {{border}}; min-width: 44px; min-height: 44px">
+<span class="navbar-toggler-icon" style="filter: {{navIconFilter}}"></span>
+</button>
+<div class="{{navCollapseClass}}" id="mainNav">
+<ul class="navbar-nav ms-auto align-items-md-center gap-md-2 pt-2 pt-md-0">
+<li class="nav-item"><a class="nav-link d-flex align-items-center" href="#projects" onClick="{{closeNav}}" style="min-height: 44px; padding: 0 14px; color: {{text}}; font-weight: 500">Projects</a></li>
+<li class="nav-item"><a class="nav-link d-flex align-items-center" href="#about" onClick="{{closeNav}}" style="min-height: 44px; padding: 0 14px; color: {{text}}; font-weight: 500">About us</a></li>
+<li class="nav-item py-2 py-md-0"><button type="button" onClick="{{toggleTheme}}" aria-label="{{themeLabel}}" style="min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid {{border}}; background: {{surface}}; color: {{text}}; font-size: 14px; font-weight: 600; cursor: pointer">{{themeButton}}</button></li>
+</ul>
+</div>
+</div>
 </nav>
 </header>
 
@@ -70,41 +81,6 @@ button{font-family:inherit}
 <a href="#projects" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 26px; border-radius: 12px; background: {{accent}}; color: {{onAccent}}; font-weight: 600; font-size: 16px">See our work</a>
 <a href="#about" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 26px; border-radius: 12px; border: 1.5px solid {{text}}; color: {{text}}; font-weight: 600; font-size: 16px">Meet us</a>
 </div>
-</div>
-<div style="flex: 1 1 320px; min-width: 0; display: flex; justify-content: center">
-<svg width="440" height="550" style="width: min(100%, 440px); max-height: 60vh; height: auto; display:block" role="img" aria-label="ko-solutions logo: bold KO and the word SOLUTIONS in a disc; the upper arm of the K continues as an arm that punches a jagged hole through the top right of the disc with a boxing glove" viewBox="-6 -113 348 435" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<mask id="cutHero" maskUnits="userSpaceOnUse" x="-100" y="-200" width="600" height="700">
-<rect x="-100" y="-200" width="600" height="700" fill="#fff"></rect>
-<g fill="#000">
-<polygon points="102.3,119.1 168.6,20.6 229.4,41.9 142.6,123.0"></polygon>
-<polygon points="227.2,11.4 209.3,48.0 243.6,57.8 208.1,75.2 224.6,98.5 191.0,92.1 189.9,113.8 171.4,94.2 160.4,108.1 156.9,87.9 140.2,94.1 146.5,78.0 124.6,73.5 139.6,62.6 119.1,41.4 143.0,41.6 138.1,5.6 162.2,25.2 182.2,-10.0 190.1,26.8"></polygon>
-</g>
-</mask>
-<mask id="thumbHero" maskUnits="userSpaceOnUse" x="-10" y="-60" width="140" height="120">
-<rect x="-10" y="-60" width="140" height="120" fill="#fff"></rect>
-<rect x="42" y="19" width="50" height="27" rx="13.5" fill="#000" stroke="#000" stroke-width="9"></rect>
-</mask>
-</defs>
-<circle cx="146.0" cy="170.0" r="128.0" fill="{{discFill}}" mask="url(#cutHero)"></circle>
-<path d="M540 688H814L567 405L819 0H558L415 252L295 154V0H74V688H295V394Z" transform="translate(36.49 208.00) scale(0.13081 -0.13081)" fill="{{redFill}}"></path>
-<path d="M788 344Q788 170 691.0 79.0Q594 -12 416 -12Q238 -12 141.5 78.5Q45 169 45 344Q45 519 141.5 609.5Q238 700 416 700Q594 700 691.0 609.0Q788 518 788 344ZM271 376V312Q271 239 308.0 196.0Q345 153 416 153Q487 153 524.5 196.0Q562 239 562 312V376Q562 449 524.5 492.0Q487 535 416 535Q345 535 308.0 492.0Q271 449 271 376Z" transform="translate(142.74 208.00) scale(0.13081 -0.13081)" fill="{{redFill}}"></path>
-<path d="M667 488V476H460V480Q460 510 438.0 530.0Q416 550 371 550Q327 550 303.5 537.0Q280 524 280 505Q280 478 312.0 465.0Q344 452 415 438Q498 421 551.5 402.5Q605 384 645.0 342.0Q685 300 686 228Q686 106 603.5 47.0Q521 -12 383 -12Q222 -12 132.5 42.0Q43 96 43 233H252Q252 181 279.0 163.5Q306 146 363 146Q405 146 432.5 155.0Q460 164 460 192Q460 217 429.5 229.5Q399 242 330 256Q246 274 191.0 293.5Q136 313 95.0 358.0Q54 403 54 480Q54 593 141.5 646.5Q229 700 363 700Q495 700 580.0 646.5Q665 593 667 488Z" transform="translate(47.03 239.00) scale(0.02471 -0.02471)" fill="{{redFill}}"></path>
-<path d="M788 344Q788 170 691.0 79.0Q594 -12 416 -12Q238 -12 141.5 78.5Q45 169 45 344Q45 519 141.5 609.5Q238 700 416 700Q594 700 691.0 609.0Q788 518 788 344ZM271 376V312Q271 239 308.0 196.0Q345 153 416 153Q487 153 524.5 196.0Q562 239 562 312V376Q562 449 524.5 492.0Q487 535 416 535Q345 535 308.0 492.0Q271 449 271 376Z" transform="translate(69.37 239.00) scale(0.02471 -0.02471)" fill="{{redFill}}"></path>
-<path d="M74 688H295V176H648V0H74Z" transform="translate(94.45 239.00) scale(0.02471 -0.02471)" fill="{{redFill}}"></path>
-<path d="M417 -12Q253 -12 163.5 62.0Q74 136 74 277V688H295V280Q295 222 326.0 187.5Q357 153 416 153Q475 153 506.5 188.0Q538 223 538 280V688H759V277Q759 136 670.0 62.0Q581 -12 417 -12Z" transform="translate(115.43 239.00) scale(0.02471 -0.02471)" fill="{{redFill}}"></path>
-<path d="M470 512V0H249V512H23V688H695V512Z" transform="translate(140.51 239.00) scale(0.02471 -0.02471)" fill="{{redFill}}"></path>
-<path d="M84 0V688H305V0Z" transform="translate(162.85 239.00) scale(0.02471 -0.02471)" fill="{{redFill}}"></path>
-<path d="M788 344Q788 170 691.0 79.0Q594 -12 416 -12Q238 -12 141.5 78.5Q45 169 45 344Q45 519 141.5 609.5Q238 700 416 700Q594 700 691.0 609.0Q788 518 788 344ZM271 376V312Q271 239 308.0 196.0Q345 153 416 153Q487 153 524.5 196.0Q562 239 562 312V376Q562 449 524.5 492.0Q487 535 416 535Q345 535 308.0 492.0Q271 449 271 376Z" transform="translate(176.97 239.00) scale(0.02471 -0.02471)" fill="{{redFill}}"></path>
-<path d="M566 0 277 334V0H74V688H267L556 349V688H759V0Z" transform="translate(202.05 239.00) scale(0.02471 -0.02471)" fill="{{redFill}}"></path>
-<path d="M667 488V476H460V480Q460 510 438.0 530.0Q416 550 371 550Q327 550 303.5 537.0Q280 524 280 505Q280 478 312.0 465.0Q344 452 415 438Q498 421 551.5 402.5Q605 384 645.0 342.0Q685 300 686 228Q686 106 603.5 47.0Q521 -12 383 -12Q222 -12 132.5 42.0Q43 96 43 233H252Q252 181 279.0 163.5Q306 146 363 146Q405 146 432.5 155.0Q460 164 460 192Q460 217 429.5 229.5Q399 242 330 256Q246 274 191.0 293.5Q136 313 95.0 358.0Q54 403 54 480Q54 593 141.5 646.5Q229 700 363 700Q495 700 580.0 646.5Q665 593 667 488Z" transform="translate(227.13 239.00) scale(0.02471 -0.02471)" fill="{{redFill}}"></path>
-<polygon points="104.6,121.1 185.2,24.3 223.2,26.1 140.3,121.0" fill="{{redFill}}"></polygon>
-<g transform="translate(197.1 33.5) rotate(-49.5) scale(1.05)" fill="{{redFill}}">
-<rect x="0" y="-25" width="22" height="50" rx="5"></rect>
-<g mask="url(#thumbHero)"><path d="M29,-26 Q29,-35 40,-35 H88 A35,35 0 0 1 88,35 H40 Q29,35 29,26 Z"></path></g>
-<rect x="42" y="19" width="50" height="27" rx="13.5"></rect>
-</g>
-</svg>
 </div>
 </section>
 
@@ -200,7 +176,7 @@ button{font-family:inherit}
 <p style="margin: 0; color: {{muted}}; font-size: 15px">Action games with physics, hordes and a bit of humour, like The Fatty.</p>
 </div>
 <div style="min-width: 0; padding: 22px; border-radius: 16px; background: {{surface2}}; border: 1px solid {{border}}">
-<h4 style="margin: 0 0 6px; font-family: 'Archivo Black', Inter, sans-serif; font-weight: 400; font-size: 18px">VS Code extensions</h4>
+<h4 style="margin: 0 0 6px; font-family: 'Archivo Black', Inter, sans-serif; font-weight: 400; font-size: 18px">Apps</h4>
 <p style="margin: 0; color: {{muted}}; font-size: 15px">Tools that make coding with AI agents smoother, like Hacky.</p>
 </div>
 <div style="min-width: 0; padding: 22px; border-radius: 16px; background: {{surface2}}; border: 1px solid {{border}}">
@@ -266,6 +242,7 @@ renderVals() {
 const st = this.state || {};
 const dark = (st.dark === undefined || st.dark === null) ? this.props.mode === 'dark' : st.dark;
 const filter = st.filter || 'all';
+const navOpen = !!st.navOpen;
 const t = dark
 ? { bg: '#0B0D17', surface: '#141A33', surface2: '#10152B', thumbBg: '#1B2345', text: '#F3F4FA', muted: '#A9B0CC', border: '#2A3358', accent: '#FF3B4E', onAccent: '#141A33', link: '#FF6B79', disc: '#F3F4FA', red: '#D91E36', panel: '#F3F4FA', onPanel: '#141A33', panelBtn: '#141A33', onPanelBtn: '#F3F4FA' }
 : { bg: '#F6F7FB', surface: '#FFFFFF', surface2: '#ECEEF7', thumbBg: '#E3E7F4', text: '#141A33', muted: '#4A5273', border: '#D3D8EA', accent: '#E11D38', onAccent: '#FFFFFF', link: '#C4122F', disc: '#141A33', red: '#FF3B4E', panel: '#141A33', onPanel: '#F3F4FA', panelBtn: '#FF3B4E', onPanelBtn: '#141A33' };
@@ -277,7 +254,7 @@ const all = [
   { t: 'image', name: 'fatty-combat', label: 'How a run goes, belt combat', alt: 'How a run goes and belt combat section' },
   { t: 'image', name: 'fatty-zombies', label: 'Zombie types and bosses', alt: 'Zombie types and bosses section' }
 ] },
-{ kind: 'software', tag: 'VS Code extension', name: 'Hacky', desc: 'A shared brain for your team\'s Claude Code agents: one shared memory, task board and question queue. Ask once, answer once, every agent knows.', meta: 'VS Code extension · Windows app · MCP server · Open source (MIT)', action: 'Get Hacky', url: 'https://hacky.ko-solutions.net/', media: [
+{ kind: 'software', tag: 'App', name: 'Hacky', desc: 'A shared brain for your team\'s Claude Code agents: one shared memory, task board and question queue. Ask once, answer once, every agent knows.', meta: 'Windows app · MCP server · Open source (MIT)', action: 'Get Hacky', url: 'https://hacky.ko-solutions.net/', media: [
   { t: 'video', name: 'hacky-hero', label: 'Live sidebar demo', alt: 'Hacky home page with the animated sidebar demo' },
   { t: 'video', name: 'hacky-tour', label: 'Board: Messages, Tasks, Team, Activity', alt: 'Hacky Board switching between its four tabs' },
   { t: 'video', name: 'hacky-map', label: 'Hacky Map: live team graph', alt: 'Hacky Map graph with links flowing between people and questions' },
@@ -340,6 +317,11 @@ accent: t.accent, onAccent: t.onAccent, link: t.link, discFill: t.disc, redFill:
 themeButton: dark ? 'Light mode' : 'Dark mode',
 themeLabel: dark ? 'Switch to light mode' : 'Switch to dark mode',
 toggleTheme: () => this.setState({ dark: !dark }),
+navExpanded: navOpen ? 'true' : 'false',
+navCollapseClass: navOpen ? 'collapse navbar-collapse show' : 'collapse navbar-collapse',
+navIconFilter: dark ? 'invert(1)' : 'none',
+toggleNav: () => this.setState({ navOpen: !navOpen }),
+closeNav: () => this.setState({ navOpen: false }),
 filters, projects, lb
 };
 }
