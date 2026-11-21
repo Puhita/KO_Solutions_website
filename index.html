@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ko-solutions - website</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
@@ -23,7 +24,7 @@ button{font-family:inherit}
 </helmet>
 <div style="min-height: 100%; background: {{bg}}; color: {{text}}; font-family: Inter, system-ui, sans-serif; line-height: 1.5">
 
-<header style="max-width: 1160px; margin: 0 auto; padding: 16px 32px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px">
+<header style="max-width: 1160px; margin: 0 auto; padding: 16px clamp(16px, 4vw, 32px); box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px">
 <a href="#top" style="display: flex; align-items: center; gap: 12px; color: {{text}}" aria-label="ko-solutions home">
 <svg width="56" height="56" style="display:block" role="img" aria-label="ko-solutions logo: bold KO and the word SOLUTIONS in a disc; the upper arm of the K continues as an arm that punches a jagged hole through the top right of the disc with a boxing glove" viewBox="-31 -78 380 380" xmlns="http://www.w3.org/2000/svg">
 <defs>
@@ -60,7 +61,7 @@ button{font-family:inherit}
 </header>
 
 <main id="top">
-<section style="max-width: 1160px; margin: 0 auto; padding: 56px 32px 88px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 48px">
+<section style="max-width: 1160px; margin: 0 auto; padding: clamp(32px, 6vw, 56px) clamp(16px, 4vw, 32px) clamp(48px, 8vw, 88px); box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 48px">
 <div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 24px">
 <span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: {{surface2}}; border: 1px solid {{border}}; color: {{link}}; font-size: 14px; font-weight: 600">Two friends · one passion</span>
 <h1 style="margin: 0; font-family: 'Archivo Black', Inter, sans-serif; font-weight: 400; font-size: clamp(40px, 7vw, 76px); line-height: 1.02; letter-spacing: -0.5px">We build games and software, together.</h1>
@@ -71,7 +72,7 @@ button{font-family:inherit}
 </div>
 </div>
 <div style="flex: 1 1 320px; min-width: 0; display: flex; justify-content: center">
-<svg width="440" height="550" style="max-width:100%;height:auto;display:block" role="img" aria-label="ko-solutions logo: bold KO and the word SOLUTIONS in a disc; the upper arm of the K continues as an arm that punches a jagged hole through the top right of the disc with a boxing glove" viewBox="-6 -113 348 435" xmlns="http://www.w3.org/2000/svg">
+<svg width="440" height="550" style="width: min(100%, 440px); max-height: 60vh; height: auto; display:block" role="img" aria-label="ko-solutions logo: bold KO and the word SOLUTIONS in a disc; the upper arm of the K continues as an arm that punches a jagged hole through the top right of the disc with a boxing glove" viewBox="-6 -113 348 435" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <mask id="cutHero" maskUnits="userSpaceOnUse" x="-100" y="-200" width="600" height="700">
 <rect x="-100" y="-200" width="600" height="700" fill="#fff"></rect>
@@ -108,7 +109,7 @@ button{font-family:inherit}
 </section>
 
 <section id="projects" style="background: {{surface2}}; border-top: 1px solid {{border}}; border-bottom: 1px solid {{border}}">
-<div style="max-width: 1160px; margin: 0 auto; padding: 80px 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 32px">
+<div style="max-width: 1160px; margin: 0 auto; padding: clamp(48px, 8vw, 80px) clamp(16px, 4vw, 32px); box-sizing: border-box; display: flex; flex-direction: column; gap: 32px">
 <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px">
 <div style="display: flex; flex-direction: column; gap: 8px">
 <h2 style="margin: 0; font-family: 'Archivo Black', Inter, sans-serif; font-weight: 400; font-size: clamp(32px, 5vw, 48px); line-height: 1.05">Projects</h2>
@@ -121,9 +122,9 @@ button{font-family:inherit}
 </div>
 </div>
 
-<div style="display: flex; flex-wrap: wrap; gap: 24px">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 24px">
 <sc-for list="{{projects}}" as="p" hint-placeholder-count="3">
-<article style="flex: 1 1 320px; max-width: 100%; min-width: 0; display: flex; flex-direction: column; background: {{surface}}; border: 1px solid {{border}}; border-radius: 18px; overflow: hidden">
+<article style="min-width: 0; display: flex; flex-direction: column; background: {{surface}}; border: 1px solid {{border}}; border-radius: 18px; overflow: hidden">
 <div style="position: relative; aspect-ratio: 16 / 10; background: {{thumbBg}}; border-bottom: 1px solid {{border}}; overflow: hidden">
 <sc-if value="{{p.cur.isVideo}}" hint-placeholder-val="{{ true }}">
 <video key="{{p.cur.key}}" data-clip="{{p.cur.src}}" data-poster="{{p.cur.poster}}" data-autoplay="{{p.autoPlay}}" muted loop playsInline preload="metadata" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; display: block"></video>
@@ -148,7 +149,7 @@ button{font-family:inherit}
 </span>
 </div>
 </div>
-<div style="padding: 24px; display: flex; flex-direction: column; gap: 12px; flex: 1">
+<div style="padding: clamp(16px, 4vw, 24px); display: flex; flex-direction: column; gap: 12px; flex: 1">
 <span style="align-self: flex-start; padding: 4px 12px; border-radius: 999px; background: {{surface2}}; color: {{link}}; font-size: 13px; font-weight: 600">{{p.tag}}</span>
 <h3 style="margin: 0; font-family: 'Archivo Black', Inter, sans-serif; font-weight: 400; font-size: 22px; line-height: 1.15">{{p.name}}</h3>
 <p style="margin: 0; color: {{muted}}; font-size: 15px">{{p.desc}}</p>
@@ -161,14 +162,14 @@ button{font-family:inherit}
 </div>
 </section>
 
-<section id="about" style="max-width: 1160px; margin: 0 auto; padding: 88px 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
+<section id="about" style="max-width: 1160px; margin: 0 auto; padding: clamp(48px, 8vw, 88px) clamp(16px, 4vw, 32px); box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
 <div style="max-width: 720px; display: flex; flex-direction: column; gap: 16px">
 <h2 style="margin: 0; font-family: 'Archivo Black', Inter, sans-serif; font-weight: 400; font-size: clamp(32px, 5vw, 48px); line-height: 1.05">About us</h2>
 <p style="margin: 0; font-size: 18px; color: {{muted}}">We are two friends who love making things on a computer. What started as late-night side projects turned into ko-solutions: the place where we put the games and tools we build together.</p>
 <p style="margin: 0; font-size: 16px; color: {{muted}}">We are both developers from Sofia, Bulgaria. We write .NET and Angular by day, and in our spare time we team up on games and tools we want to exist.</p>
 </div>
-<div style="display: flex; flex-wrap: wrap; gap: 24px">
-<article style="flex: 1 1 320px; min-width: 0; padding: 28px; border-radius: 18px; background: {{surface}}; border: 1px solid {{border}}; display: flex; flex-direction: column; gap: 14px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 24px">
+<article style="min-width: 0; padding: 28px; border-radius: 18px; background: {{surface}}; border: 1px solid {{border}}; display: flex; flex-direction: column; gap: 14px">
 <div style="display: flex; align-items: center; gap: 16px">
 <span aria-hidden="true" style="flex-shrink: 0; width: 64px; height: 64px; border-radius: 999px; background: {{accent}}; color: {{onAccent}}; display: flex; align-items: center; justify-content: center; font-family: 'Archivo Black', Inter, sans-serif; font-size: 24px">K</span>
 <div style="display: flex; flex-direction: column">
@@ -179,7 +180,7 @@ button{font-family:inherit}
 <p style="margin: 0; color: {{muted}}; font-size: 15px">Builds full-stack web apps in .NET and Angular, and AI systems that cite their sources and track their own cost.</p>
 <a href="https://kristiyanvakov.github.io/" target="_blank" rel="noopener" style="margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 10px; border: 1.5px solid {{text}}; color: {{text}}; font-size: 15px; font-weight: 600">View Kristiyan's portfolio</a>
 </article>
-<article style="flex: 1 1 320px; min-width: 0; padding: 28px; border-radius: 18px; background: {{surface}}; border: 1px solid {{border}}; display: flex; flex-direction: column; gap: 14px">
+<article style="min-width: 0; padding: 28px; border-radius: 18px; background: {{surface}}; border: 1px solid {{border}}; display: flex; flex-direction: column; gap: 14px">
 <div style="display: flex; align-items: center; gap: 16px">
 <span aria-hidden="true" style="flex-shrink: 0; width: 64px; height: 64px; border-radius: 999px; background: {{text}}; color: {{bg}}; display: flex; align-items: center; justify-content: center; font-family: 'Archivo Black', Inter, sans-serif; font-size: 24px">O</span>
 <div style="display: flex; flex-direction: column">
@@ -193,16 +194,16 @@ button{font-family:inherit}
 </div>
 <div style="display: flex; flex-direction: column; gap: 16px">
 <h3 style="margin: 0; font-family: 'Archivo Black', Inter, sans-serif; font-weight: 400; font-size: 20px">What we love building</h3>
-<div style="display: flex; flex-wrap: wrap; gap: 16px">
-<div style="flex: 1 1 240px; min-width: 0; padding: 22px; border-radius: 16px; background: {{surface2}}; border: 1px solid {{border}}">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 16px">
+<div style="min-width: 0; padding: 22px; border-radius: 16px; background: {{surface2}}; border: 1px solid {{border}}">
 <h4 style="margin: 0 0 6px; font-family: 'Archivo Black', Inter, sans-serif; font-weight: 400; font-size: 18px">Games</h4>
 <p style="margin: 0; color: {{muted}}; font-size: 15px">Action games with physics, hordes and a bit of humour, like The Fatty.</p>
 </div>
-<div style="flex: 1 1 240px; min-width: 0; padding: 22px; border-radius: 16px; background: {{surface2}}; border: 1px solid {{border}}">
+<div style="min-width: 0; padding: 22px; border-radius: 16px; background: {{surface2}}; border: 1px solid {{border}}">
 <h4 style="margin: 0 0 6px; font-family: 'Archivo Black', Inter, sans-serif; font-weight: 400; font-size: 18px">VS Code extensions</h4>
 <p style="margin: 0; color: {{muted}}; font-size: 15px">Tools that make coding with AI agents smoother, like Hacky.</p>
 </div>
-<div style="flex: 1 1 240px; min-width: 0; padding: 22px; border-radius: 16px; background: {{surface2}}; border: 1px solid {{border}}">
+<div style="min-width: 0; padding: 22px; border-radius: 16px; background: {{surface2}}; border: 1px solid {{border}}">
 <h4 style="margin: 0 0 6px; font-family: 'Archivo Black', Inter, sans-serif; font-weight: 400; font-size: 18px">Software tools</h4>
 <p style="margin: 0; color: {{muted}}; font-size: 15px">Apps that solve problems we ran into ourselves, like DataTransfer.</p>
 </div>
@@ -212,7 +213,7 @@ button{font-family:inherit}
 </main>
 
 <footer style="border-top: 1px solid {{border}}">
-<div style="max-width: 1160px; margin: 0 auto; padding: 24px 32px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; color: {{muted}}; font-size: 14px">
+<div style="max-width: 1160px; margin: 0 auto; padding: 24px clamp(16px, 4vw, 32px); box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; color: {{muted}}; font-size: 14px">
 <span>© 2026 ko-solutions</span>
 <span>Made by two friends who love building things</span>
 </div>
@@ -220,8 +221,8 @@ button{font-family:inherit}
 <sc-if value="{{lb.open}}" hint-placeholder-val="{{ false }}">
 <div role="dialog" aria-modal="true" aria-label="{{lb.title}}" onClick="{{lb.onBackdrop}}" style="position: fixed; inset: 0; z-index: 50; background: rgba(5, 7, 15, 0.9); display: flex; align-items: center; justify-content: center; padding: 16px; box-sizing: border-box; outline: none">
 <div style="width: 100%; max-width: 1120px; max-height: 100%; display: flex; flex-direction: column; gap: 12px; color: #F3F4FA">
-<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
-<div style="min-width: 0; display: flex; flex-direction: column">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<div style="min-width: 0; flex: 1 1 160px; display: flex; flex-direction: column">
 <span style="font-family: 'Archivo Black', Inter, sans-serif; font-size: 20px; line-height: 1.2">{{lb.title}}</span>
 <span style="font-size: 14px; color: #A9B0CC">{{lb.cur.kindLabel}} · {{lb.cur.label}} · {{lb.counter}}</span>
 </div>
